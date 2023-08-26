@@ -4,22 +4,40 @@
 
 // 1, 2, 5, 7, 19, 6, 1, 33 -> [1, 2, 5, 7, 19, 6, 1, 33]
 
-void FillArray (int[] array)
+int Prompt (string message)
 {
-Random rnd = new Random ();
-for (int i = 0; i < array.Length; i++)
-{
-array [i] = rnd.Next (0, 9);
+    System.Console.Write (message);
+    string ReadInput = System.Console.ReadLine ();
+    int result = int.Parse (ReadInput);
+    return result;
 }
+
+int [] GenerateArray (int Length, int minValue, int maxValue)
+{
+    int [] array = new int [Length];
+    Random random = new Random ();
+    for (int i = 0; i < Length; i++)
+    {
+        array [i] = random.Next (minValue, maxValue + 1);
+    }
+    return array;
 }
 
 void PrintArray (int[] array)
 {
-for (int i = 0; i < array.Length; i++)
-{
-Console.WriteLine(array [i] + " ");
+    System.Console.Write ("[");
+    for (int i = 0; i < array.Length - 1; i++)
+    {
+        System.Console.Write ($"{array[i]}, ");
+
+    }
+     System.Console.Write ($"{array[array.Length - 1]}");
+     System.Console.WriteLine ("]");
 }
-}
-int [] arr = new int [8];
-FillArray (arr);
-PrintArray (arr);
+
+int length = Prompt ("Длина массива: ");
+int min = Prompt ("Начальное значение для диапозона случайного числа: ");
+int max = Prompt ("Конечное значение для диапозона случайного числа: ");
+int[] array = GenerateArray (length, min, max);
+
+PrintArray (array);
